@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Session;
 
 class AppUserController extends Controller
 {
-    public function app(){
+    public function app()
+    {
         return response()->json(['success' => true], 200);
     }
 
@@ -17,6 +18,7 @@ class AppUserController extends Controller
     public function getUserProfile()
     {
         $profile = Session::user();
+
 
         if ($profile) {
             return response()->json($profile, 200);
@@ -33,7 +35,7 @@ class AppUserController extends Controller
             'birth_date' => 'required|string',
             'fcm_token' => 'required|string',
         ]);
-    
+
         // check if app user with this session_id exists
         $user_exists = FxAppUser::where('session_id', $request->session_id)->exists();
         if ($user_exists) {
@@ -46,7 +48,7 @@ class AppUserController extends Controller
 
     public function updateUserProfile(Request $request)
     {
-        $profile = FxAppUser::user();
+        $profile = Session::user();
 
         if ($profile) {
             $profile->update($request->all());
@@ -54,5 +56,14 @@ class AppUserController extends Controller
         } else {
             return response()->json(['error' => 'Session not found'], 404);
         }
+    }
+
+    public function setAsTester()
+    {
+        $profile = Session::user();
+
+        FxAppUser::where('session_id', $profile->session_id)->update(['tester' => 1]);
+
+        return response()->json(FxAppUser::where('session_id', $profile->session_id)->first(), 200);
     }
 }

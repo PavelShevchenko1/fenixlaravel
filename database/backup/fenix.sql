@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Ноя 10 2024 г., 16:49
+-- Время создания: Ноя 14 2024 г., 19:53
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.1.9
 
@@ -48,6 +48,7 @@ CREATE TABLE `fx_app_users` (
   `gender` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `birth_date` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fcm_token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tester` tinyint NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -56,8 +57,10 @@ CREATE TABLE `fx_app_users` (
 -- Дамп данных таблицы `fx_app_users`
 --
 
-INSERT INTO `fx_app_users` (`session_id`, `gender`, `birth_date`, `fcm_token`, `created_at`, `updated_at`) VALUES
-('session123', 'dwadwa', 'dadwad', 'sdadwa', '2024-10-10 01:30:33', '2024-10-10 01:30:33');
+INSERT INTO `fx_app_users` (`session_id`, `gender`, `birth_date`, `fcm_token`, `tester`, `created_at`, `updated_at`) VALUES
+('a34bd59d-8527-4558-9156-1473bd200f0d', 'male', '2000-01-01T00:00:00.000', 'eb37ukAfQ2e8KFC8dU_4_b:APA91bHxaVIYKsgF1lZiVAQw7S2xhsoZyzif9RKV2eQ8P262yr9AXyvBjvqM8quSJbIioVvk_lTjAQj9YN79YZT266UpXSTBVln8kXdj31s9e3mmoQfvGT4', 0, '2024-11-14 13:08:13', '2024-11-14 13:08:13'),
+('session123', 'dwadwa2', 'dadwad1', 'sdadwa1', 1, '2024-10-10 01:30:33', '2024-11-14 13:47:59'),
+('session456', 'dwadwa', 'dadwad', 'sdadwa', 0, '2024-11-14 13:47:15', '2024-11-14 13:47:15');
 
 -- --------------------------------------------------------
 
@@ -103,7 +106,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (6, '2024_10_08_160855_create_fx_news_table', 2),
-(7, '2024_10_09_173325_create_fx_app_users_table', 3);
+(7, '2024_10_09_173325_create_fx_app_users_table', 3),
+(8, '2024_11_14_163723_add_test_column_to_fx_app_users', 4);
 
 -- --------------------------------------------------------
 
@@ -230,7 +234,7 @@ ALTER TABLE `fx_news`
 -- AUTO_INCREMENT для таблицы `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `personal_access_tokens`

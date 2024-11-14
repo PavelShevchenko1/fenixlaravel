@@ -22,3 +22,4 @@ Route::get('/app', [App\Http\Controllers\Api\AppUserController::class, 'app']);
 Route::get('/user/profile', [App\Http\Controllers\Api\AppUserController::class, 'getUserProfile'])->middleware('app.auth');
 Route::post('/user/profile', [App\Http\Controllers\Api\AppUserController::class, 'createProfile']);
 Route::put('/user/profile', [App\Http\Controllers\Api\AppUserController::class, 'updateUserProfile'])->middleware('app.auth');
+Route::put('/user/profile/tester', [App\Http\Controllers\Api\AppUserController::class, 'setAsTester'])->middleware('app.auth');

@@ -17,8 +17,8 @@
         </div>
     </div> --}}
 
-    {{-- @include('livewire.news.create')
-    @include('livewire.news.delete') --}}
+    {{-- @include('livewire.news.create') --}}
+    @include('livewire.users.delete')
 
     @if (session()->has('message'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -40,12 +40,17 @@
                         <th>Пол</th>
                         <th>Дата обновления</th>
                         <th>Дата создания</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($items as $item)
                         <tr>
-                            <td><span class="text-reset  fw-bold">{{ $item->session_id }}</span> </td>
+                            <td><span class="text-reset  fw-bold">{{ $item->session_id }}</span>
+                                @if ($item->tester == 1)
+                                    <span class="badge bg-success">Тестировщик</span>
+                                @endif
+                            </td>
                             <td>{{ $item->birth_date }}</td>
                             <td>{{ $item->gender }}</td>
                             <td>
@@ -53,6 +58,12 @@
                             </td>
                             <td>
                                 {{ $item->created_at->format('d.m.Y') }}
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-sm"
+                                    wire:click="openDeleteModal('{{ $item->session_id }}')">
+                                    <i class="uil uil-trash-alt"></i>
+                                </button>
                             </td>
                         </tr>
                     @endforeach
@@ -62,18 +73,18 @@
     </div>
 </div>
 @section('script')
-    {{-- <script>
-        window.addEventListener('open-create-modal', event => {
-            $('#addItem').modal('show');
-        });
-        window.addEventListener('close-create-modal', event => {
-            $('#addItem').modal('hide');
-        });
+    <script>
+        // window.addEventListener('open-create-modal', event => {
+        //     $('#addItem').modal('show');
+        // });
+        // window.addEventListener('close-create-modal', event => {
+        //     $('#addItem').modal('hide');
+        // });
         window.addEventListener('open-delete-modal', event => {
             $('#deleteConfirm').modal('show');
         });
         window.addEventListener('close-delete-modal', event => {
             $('#deleteConfirm').modal('hide');
         });
-    </script> --}}
+    </script>
 @endsection
