@@ -2,12 +2,12 @@
 
 namespace App\Livewire;
 
-use App\Models\FxNews;
+use App\Models\FxBeerSort;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
-class NewsComponent extends Component
+class SortsComponent extends Component
 {
 
 
@@ -15,15 +15,13 @@ class NewsComponent extends Component
 
     //Form Fields
 
-    public $title,
-        $description,
+    public $descr,
         $image_select,
         $image;
 
     //Helpers
     public $item_edit_id,
-        $item_delete_id,
-        $item_delete_name;
+        $item_delete_id;
 
 
     public function addItem()
@@ -35,10 +33,9 @@ class NewsComponent extends Component
     public function editItem($edit_id)
     {
         $this->resetInputFields();
-        $editItem = FxNews::find($edit_id);
+        $editItem = FxBeerSort::find($edit_id);
         $this->item_edit_id = $editItem->id;
-        $this->title = $editItem->title;
-        $this->description = $editItem->description;
+        $this->descr = $editItem->descr;
         $this->image = $editItem->image ? str_replace('public/', 'storage/', $editItem->image) : null;
         $this->openCreateModal();
     }
@@ -47,19 +44,17 @@ class NewsComponent extends Component
     public function createItem()
     {
         $this->validate([
-            'title' => 'required|string',
-            'description' => 'required|string',
+            'descr' => 'required|string',
             'image_select' => 'nullable|sometimes|image|max:3072'
         ]);
 
         $isEditing = $this->item_edit_id != '';
-        $item = $isEditing ? FxNews::find($this->item_edit_id) : new FxNews;
-        $item->title = $this->title;
-        $item->description = $this->description;
+        $item = $isEditing ? FxBeerSort::find($this->item_edit_id) : new FxBeerSort;
+        $item->descr = $this->descr;
 
         if ($this->image_select) {
             $old_image = $item->image;
-            $item->image = $this->image_select->store('public/uploads/news');
+            $item->image = $this->image_select->store('public/uploads/sorts');
             if ($old_image != null) {
                 Storage::delete($old_image);
             }
@@ -69,13 +64,13 @@ class NewsComponent extends Component
 
 
         if ($isEditing) {
-            session()->flash('message', 'Информация о новости "' . $this->title . '" обновлена!');
+            session()->flash('message', 'Информация о сорте обновлена!');
         } else {
-            session()->flash('message', 'Добавлена новость "' . $this->title . '"!');
+            session()->flash('message', 'Добавлен сорт!');
         }
-        
+
         $this->resetInputFields();
-        
+
         $this->dispatch('close-create-modal');
     }
     public function deleteItem()
@@ -83,7 +78,7 @@ class NewsComponent extends Component
         if ($this->item_delete_id == null) {
             return;
         }
-        $itemToDelete = FxNews::find($this->item_delete_id);
+        $itemToDelete = FxBeerSort::find($this->item_delete_id);
         $itemToDelete->delete();
         $this->resetInputFields();
         $this->closeDeleteModal();
@@ -92,9 +87,8 @@ class NewsComponent extends Component
 
     public function openDeleteModal($i)
     {
-        $itemToDelete = FxNews::find($i);
+        $itemToDelete = FxBeerSort::find($i);
         $this->item_delete_id = $itemToDelete->id;
-        $this->item_delete_name = $itemToDelete->title;
         $this->dispatch('open-delete-modal');
     }
 
@@ -115,25 +109,22 @@ class NewsComponent extends Component
         $this->resetInputFields();
         $this->dispatch('close-create-modal');
     }
- 
+
     private function resetInputFields()
     {
 
         $this->item_edit_id = '';
         $this->item_delete_id = '';
-        $this->item_delete_name = '';
-
-        $this->title = '';
-        $this->description = '';
+        $this->descr = '';
         $this->image = '';
         $this->image_select = '';
     }
 
     public function render()
     {
-        $items = FxNews::all();
+        $items = FxBeerSort::all();
 
-        return view('livewire.news.index', ['items' => $items])
+        return view('livewire.sorts.index', ['items' => $items])
             ->extends('layouts.master')
             ->section('content');
     }

@@ -18,6 +18,7 @@ class UsersComponent extends Component
             ->section('content');
     }
 
+    
 
     public function openDeleteModal($i)
     {

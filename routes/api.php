@@ -15,11 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/news', [App\Http\Controllers\Api\NewsController::class, 'getNews']);
 
 Route::get('/app', [App\Http\Controllers\Api\AppUserController::class, 'app']);
 
-Route::get('/user/profile', [App\Http\Controllers\Api\AppUserController::class, 'getUserProfile'])->middleware('app.auth');
 Route::post('/user/profile', [App\Http\Controllers\Api\AppUserController::class, 'createProfile']);
+Route::get('/user/profile', [App\Http\Controllers\Api\AppUserController::class, 'getUserProfile'])->middleware('app.auth');
 Route::put('/user/profile', [App\Http\Controllers\Api\AppUserController::class, 'updateUserProfile'])->middleware('app.auth');
 Route::put('/user/profile/tester', [App\Http\Controllers\Api\AppUserController::class, 'setAsTester'])->middleware('app.auth');
+
+Route::get('/news', [App\Http\Controllers\Api\NewsController::class, 'getNews'])->middleware('app.auth');
+Route::get('/stores', [App\Http\Controllers\Api\StoresController::class, 'getStores'])->middleware('app.auth');
+Route::get('/sorts', [App\Http\Controllers\Api\SortsController::class, 'getSorts'])->middleware('app.auth');

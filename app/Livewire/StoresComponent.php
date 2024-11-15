@@ -2,12 +2,12 @@
 
 namespace App\Livewire;
 
-use App\Models\FxNews;
+use App\Models\FxStore;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
-class NewsComponent extends Component
+class StoresComponent extends Component
 {
 
 
@@ -15,8 +15,11 @@ class NewsComponent extends Component
 
     //Form Fields
 
-    public $title,
-        $description,
+    public $uptitle,
+        $title,
+        $phone,
+        $hours,
+        $weekend_plan,
         $image_select,
         $image;
 
@@ -35,10 +38,13 @@ class NewsComponent extends Component
     public function editItem($edit_id)
     {
         $this->resetInputFields();
-        $editItem = FxNews::find($edit_id);
+        $editItem = FxStore::find($edit_id);
         $this->item_edit_id = $editItem->id;
+        $this->uptitle = $editItem->uptitle;
         $this->title = $editItem->title;
-        $this->description = $editItem->description;
+        $this->phone = $editItem->phone;
+        $this->hours = $editItem->hours;
+        $this->weekend_plan = $editItem->weekend_plan;
         $this->image = $editItem->image ? str_replace('public/', 'storage/', $editItem->image) : null;
         $this->openCreateModal();
     }
@@ -47,19 +53,25 @@ class NewsComponent extends Component
     public function createItem()
     {
         $this->validate([
-            'title' => 'required|string',
-            'description' => 'required|string',
+            'uptitle' => 'nullable|sometimes|string',
+            'title' => 'nullable|sometimes|string',
+            'phone' => 'nullable|sometimes|string',
+            'hours' => 'nullable|sometimes|string',
+            'weekend_plan' => 'nullable|sometimes|string',
             'image_select' => 'nullable|sometimes|image|max:3072'
         ]);
 
         $isEditing = $this->item_edit_id != '';
-        $item = $isEditing ? FxNews::find($this->item_edit_id) : new FxNews;
+        $item = $isEditing ? FxStore::find($this->item_edit_id) : new FxStore;
+        $item->uptitle = $this->uptitle;
         $item->title = $this->title;
-        $item->description = $this->description;
+        $item->phone = $this->phone;
+        $item->hours = $this->hours;
+        $item->weekend_plan = $this->weekend_plan;
 
         if ($this->image_select) {
             $old_image = $item->image;
-            $item->image = $this->image_select->store('public/uploads/news');
+            $item->image = $this->image_select->store('public/uploads/stores');
             if ($old_image != null) {
                 Storage::delete($old_image);
             }
@@ -69,9 +81,9 @@ class NewsComponent extends Component
 
 
         if ($isEditing) {
-            session()->flash('message', 'Информация о новости "' . $this->title . '" обновлена!');
+            session()->flash('message', 'Информация о магазине "' . $this->title . '" обновлена!');
         } else {
-            session()->flash('message', 'Добавлена новость "' . $this->title . '"!');
+            session()->flash('message', 'Добавлен магазин "' . $this->title . '"!');
         }
         
         $this->resetInputFields();
@@ -83,16 +95,16 @@ class NewsComponent extends Component
         if ($this->item_delete_id == null) {
             return;
         }
-        $itemToDelete = FxNews::find($this->item_delete_id);
+        $itemToDelete = FxStore::find($this->item_delete_id);
         $itemToDelete->delete();
         $this->resetInputFields();
         $this->closeDeleteModal();
-        session()->flash('message', 'Новость удалена!');
+        session()->flash('message', 'Магазин удален!');
     }
 
     public function openDeleteModal($i)
     {
-        $itemToDelete = FxNews::find($i);
+        $itemToDelete = FxStore::find($i);
         $this->item_delete_id = $itemToDelete->id;
         $this->item_delete_name = $itemToDelete->title;
         $this->dispatch('open-delete-modal');
@@ -123,17 +135,20 @@ class NewsComponent extends Component
         $this->item_delete_id = '';
         $this->item_delete_name = '';
 
+        $this->uptitle = '';
         $this->title = '';
-        $this->description = '';
+        $this->phone = '';
+        $this->hours = '';
+        $this->weekend_plan = '';
         $this->image = '';
         $this->image_select = '';
     }
 
     public function render()
     {
-        $items = FxNews::all();
+        $items = FxStore::all();
 
-        return view('livewire.news.index', ['items' => $items])
+        return view('livewire.stores.index', ['items' => $items])
             ->extends('layouts.master')
             ->section('content');
     }

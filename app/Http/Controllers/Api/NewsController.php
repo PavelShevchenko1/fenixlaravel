@@ -11,7 +11,7 @@ class NewsController extends Controller
     // get news
     public function getNews()
     {
-        $news = FxNews::orderBy('created_at', 'desc')->get();
+        $news = FxNews::orderBy('updated_at', 'desc')->get();
         return response()->json($news);
     }
 }

@@ -36,6 +36,7 @@
                 <thead>
                     <tr>
                         <th>Сессия</th>
+                        <th>Устройство</th>
                         <th>Дата рождения</th>
                         <th>Пол</th>
                         <th>Дата обновления</th>
@@ -51,21 +52,33 @@
                                     <span class="badge bg-success">Тестировщик</span>
                                 @endif
                             </td>
-                            <td>{{ $item->birth_date }}</td>
-                            <td>{{ $item->gender }}</td>
                             <td>
-                                {{ $item->updated_at->format('d.m.Y') }}
-                            </td>
-                            <td>
-                                {{ $item->created_at->format('d.m.Y') }}
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-danger btn-sm"
-                                    wire:click="openDeleteModal('{{ $item->session_id }}')">
-                                    <i class="uil uil-trash-alt"></i>
-                                </button>
-                            </td>
-                        </tr>
+                                @if ($item->platform == 'android')
+                                    <i class="uil uil-android" style="color: rgb(1, 201, 1)"></i>
+                                @else
+                                    @if ($item->platform == 'ios')
+                                        <i class="uil uil-apple" style="color: grey"></i>
+                                    @else
+                                        -
+                                    @endif
+
+                                @endif
+                    </td>
+                    <td>{{ $item->birth }}</td>
+                    <td>{{ $item->pol }}</td>
+                    <td>
+                        {{ $item->updated_at->format('d.m.Y H:i') }}
+                    </td>
+                    <td>
+                        {{ $item->created_at->format('d.m.Y H:i') }}
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm"
+                            wire:click="openDeleteModal('{{ $item->session_id }}')">
+                            <i class="uil uil-trash-alt"></i>
+                        </button>
+                    </td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>

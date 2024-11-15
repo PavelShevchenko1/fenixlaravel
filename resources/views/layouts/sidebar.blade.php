@@ -38,13 +38,23 @@
                         <i class="uil-newspaper"></i><span>Новости</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ url('/sorts') }}">
+                        <i class="bx bxs-drink"></i><span>Наши сорта</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/stores') }}">
+                        <i class="uil uil-map"></i><span>Адреса и телефоны</span>
+                    </a>
+                </li>
                 <li class="menu-title">Система</li>
                 <li>
                     <a href="{{ url('/users') }}">
                         <i class="uil-users-alt"></i><span>Пользователи</span>
                     </a>
                 </li>
-                
+
 
             </ul>
         </div>

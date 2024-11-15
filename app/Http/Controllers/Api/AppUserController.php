@@ -34,6 +34,7 @@ class AppUserController extends Controller
             'gender' => 'required|string',
             'birth_date' => 'required|string',
             'fcm_token' => 'required|string',
+            'platform' => 'required|string'
         ]);
 
         // check if app user with this session_id exists

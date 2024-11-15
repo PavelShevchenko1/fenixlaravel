@@ -1,6 +1,8 @@
 <?php
 
 use App\Livewire\NewsComponent;
+use App\Livewire\SortsComponent;
+use App\Livewire\StoresComponent;
 use App\Livewire\UsersComponent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -31,4 +33,6 @@ Route::middleware('auth')->group(function () {
     });
     Route::get('/news', NewsComponent::class);
     Route::get('/users', UsersComponent::class);
+    Route::get('/sorts', SortsComponent::class);
+    Route::get('/stores', StoresComponent::class);
 });
