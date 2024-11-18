@@ -51,7 +51,17 @@
                 <li class="menu-title">Система</li>
                 <li>
                     <a href="{{ url('/users') }}">
-                        <i class="uil-users-alt"></i><span>Пользователи</span>
+                        <i class="uil-user"></i><span>Пользователи</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/user-groups') }}">
+                        <i class="uil-users-alt"></i><span>Группы пользователей</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/notifications') }}">
+                        <i class="bx bx-bell"></i><span>Уведомления</span>
                     </a>
                 </li>
 

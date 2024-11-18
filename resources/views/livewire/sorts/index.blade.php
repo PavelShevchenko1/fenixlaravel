@@ -75,11 +75,15 @@
                         <img class="card-img-top img-fluid" src="{{ URL::asset('assets/images/small/img-1.jpg') }}"
                             alt="Card image cap">
                     @endif
-                    <div class="card-body">
-                        <a wire:click= "editItem({{ $item->id }})"
-                            class="btn btn-outline-primary waves-effect waves-light">Редактировать</a>
-                        <a wire:click= "openDeleteModal({{ $item->id }})"
-                            class="btn btn-outline-danger waves-effect waves-light">Удалить</a>
+                    <div class="card-body" style="padding-top: 10px!important;padding-bottom: 10px!important">
+                        <div class="d-flex justify-content-end align-items-end">
+                            <a wire:click="editItem({{ $item->id }})"
+                                class="btn btn-outline-success waves-effect waves-light me-2"><i
+                                    class="uil uil-edit-alt"></i> Редактировать</a>
+                            <a wire:click="openDeleteModal({{ $item->id }})"
+                                class="btn btn-outline-danger waves-effect waves-light"><i
+                                    class="uil uil-trash-alt"></i></a>
+                        </div>
                     </div><!-- end cardbody -->
                 </div><!-- end card -->
             </div>

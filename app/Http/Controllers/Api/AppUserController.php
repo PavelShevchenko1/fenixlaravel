@@ -11,7 +11,7 @@ class AppUserController extends Controller
 {
     public function app()
     {
-        return response()->json(['success' => true], 200);
+        return response()->json(['success' => true, 'topics' => FxAppUser::$all_topics], 200);
     }
 
 

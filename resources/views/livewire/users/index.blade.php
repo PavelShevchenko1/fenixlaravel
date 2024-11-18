@@ -31,7 +31,7 @@
     <div class="row">
 
         <div class="table-responsive mb-4">
-            <table class="table table-centered datatable dt-responsive nowrap table-card-list"
+            <table class="table table-striped table-centered datatable dt-responsive nowrap table-card-list"
                 style="border-collapse: collapse; width: 100%;">
                 <thead>
                     <tr>
@@ -73,7 +73,7 @@
                         {{ $item->created_at->format('d.m.Y H:i') }}
                     </td>
                     <td>
-                        <button type="button" class="btn btn-danger btn-sm"
+                        <button type="button" class="btn btn-outline-danger btn-sm"
                             wire:click="openDeleteModal('{{ $item->session_id }}')">
                             <i class="uil uil-trash-alt"></i>
                         </button>

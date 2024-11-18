@@ -68,23 +68,44 @@
         @foreach ($items as $item)
             <div class="col-md-4  col-xl-2 d-flex align-items-stretch">
                 <div class="card" style="width: 100%">
-                    @if ($item->image)
-                        <img src="{{ asset(str_replace('public/', 'storage/', $item->image)) }}" alt=""
-                            class="card-img-top img-fluid" style="height: 150px; object-fit: cover" height="100px">
-                    @else
+                    <div style="position: relative;">
+                        @if ($item->image)
+                            <img src="{{ asset(str_replace('public/', 'storage/', $item->image)) }}" alt=""
+                                class="card-img-top img-fluid" style="height: 200px; object-fit: cover;">
+                            <div
+                                style="position: absolute; bottom: 0; left: 0; right: 0; height: 100%; background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);">
+                            </div>
+                            <div style="position: absolute; bottom: 10px; left: 10px; color: white;">
+                                <h6 class="mt-0" style="color: #ffcb71!important">{{ $item->uptitle }}</h6>
+                                <h4 class="card-title" style="color: white!important">{{ $item->title }}</h4>
+
+                            </div>
+                        @else
+                            <img class="card-img-top img-fluid" src="{{ URL::asset('assets/images/small/img-1.jpg') }}"
+                                alt="Card image cap">
+                        @endif
+                    </div>
+                    {{-- @else
                         <img class="card-img-top img-fluid" src="{{ URL::asset('assets/images/small/img-1.jpg') }}"
                             alt="Card image cap">
-                    @endif
-                    <div class="card-body">
-                        <h4 class="card-title">{{ $item->title }}</h4>
-                        <h6 class="text-primary ">{{ $item->uptitle }}</h6>
-                        <p class="card-title-desc mb-0">- {{ $item->phone }}</p>
-                        <p class="card-title-desc mb-0">- {{ $item->hours }}</p>
-                        <p class="card-title-desc mb-3">- {{ $item->weekend_plan }}</p>
-                        <a wire:click= "editItem({{ $item->id }})"
-                            class="btn btn-outline-primary waves-effect waves-light">Редактировать</a>
-                        <a wire:click= "openDeleteModal({{ $item->id }})"
-                            class="btn btn-outline-danger waves-effect waves-light">Удалить</a>
+                    @endif --}}
+                    <div class="card-body" style="padding-bottom: 0!important">
+                        {{-- <h4 class="card-title">{{ $item->title }}</h4> --}}
+                        {{-- <h6 class="text-primary mt-0">{{ $item->uptitle }}</h6> --}}
+                        <p class="card-title-desc mb-0"><i class="uil uil-phone-alt text-primary"></i>
+                            {{ $item->phone }}</p>
+                        <p class="card-title-desc mb-0"><i class="uil uil-clock-eight text-primary"></i>
+                            {{ $item->hours }}</p>
+                        <p class="card-title-desc mb-0"><i class="uil uil-calendar-alt text-primary"></i>
+                            {{ $item->weekend_plan }}</p>
+                    </div><!-- end cardbody -->
+                    <div class="card-body" style="padding-top: 5px!important">
+                        <div class="d-flex justify-content-end align-items-end">
+                            <a wire:click="editItem({{ $item->id }})"
+                                class="btn btn-outline-success waves-effect waves-light me-2"><i class="uil uil-edit-alt"></i> Редактировать</a>
+                            <a wire:click="openDeleteModal({{ $item->id }})"
+                                class="btn btn-outline-danger waves-effect waves-light"><i class="uil uil-trash-alt"></i></a>
+                        </div>
                     </div><!-- end cardbody -->
                 </div><!-- end card -->
             </div>
