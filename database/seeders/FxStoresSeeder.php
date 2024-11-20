@@ -96,6 +96,7 @@ class FxStoresSeeder extends Seeder
                 'title' => $store['title'],
                 'phone' => $store['phone'],
                 'hours' => $store['hours'],
+                'geo' => $store['geo'],
                 'weekend_plan' => $store['weekend_plan']
             ]);
         }

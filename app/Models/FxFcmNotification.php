@@ -24,7 +24,7 @@ class FxFcmNotification extends Model
     public function getTopicAttribute()
     {
         $topic = 'all';
-        if ($this->is_all == 1) {
+        if ($this->to_all == 1) {
             $topic = 'all';
             return $topic;
         }
