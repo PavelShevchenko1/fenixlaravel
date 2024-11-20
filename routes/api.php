@@ -24,6 +24,7 @@ Route::put('/user/profile', [App\Http\Controllers\Api\AppUserController::class, 
 Route::put('/user/profile/tester', [App\Http\Controllers\Api\AppUserController::class, 'setAsTester'])->middleware('app.auth');
 
 Route::get('/news', [App\Http\Controllers\Api\NewsController::class, 'getNews'])->middleware('app.auth');
+Route::get('/news/{id}', [App\Http\Controllers\Api\NewsController::class, 'getNewsById']);
 Route::get('/stores', [App\Http\Controllers\Api\StoresController::class, 'getStores'])->middleware('app.auth');
 Route::get('/sorts', [App\Http\Controllers\Api\SortsController::class, 'getSorts'])->middleware('app.auth');
 Route::get('/sorts', [App\Http\Controllers\Api\SortsController::class, 'getSorts'])->middleware('app.auth');
