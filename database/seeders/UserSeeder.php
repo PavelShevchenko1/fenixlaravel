@@ -18,8 +18,9 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->where('email', 'admin@themesbrand.com')->delete();
+        DB::table('users')->where('email', 'fenix@fenix.ru')->delete();
         User::updateOrCreate([
-            'email' => 'fenix@fenix.ru'
+            'email' => 'info@fenixbeer.ru'
         ], [
             'name' => 'Super Admin',
             'password' => Hash::make('fenix@!$#^%2024SMTXT'),
