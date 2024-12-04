@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class FxAppUserGroup extends Model
 {
     use HasFactory;
+
 }

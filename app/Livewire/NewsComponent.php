@@ -17,6 +17,8 @@ class NewsComponent extends Component
 
     public $title,
         $description,
+        $published,
+        $is_birthday = false,
         $image_select,
         $image;
 
@@ -39,6 +41,8 @@ class NewsComponent extends Component
         $this->item_edit_id = $editItem->id;
         $this->title = $editItem->title;
         $this->description = $editItem->description;
+        $this->published = $editItem->published;
+        $this->is_birthday = $editItem->is_birthday == 1 ? true : false;
         $this->image = $editItem->image ? str_replace('public/', 'storage/', $editItem->image) : null;
         $this->openCreateModal();
     }
@@ -49,6 +53,8 @@ class NewsComponent extends Component
         $this->validate([
             'title' => 'required|string',
             'description' => 'required|string',
+            'published' => 'nullable|date',
+            'is_birthday' => 'nullable|sometimes|boolean',
             'image_select' => 'nullable|sometimes|image|max:3072'
         ]);
 
@@ -56,6 +62,8 @@ class NewsComponent extends Component
         $item = $isEditing ? FxNews::find($this->item_edit_id) : new FxNews;
         $item->title = $this->title;
         $item->description = $this->description;
+        $item->is_birthday = $this->is_birthday  == true ? true : false;
+        $item->published = $this->published == null || $this->published == '' ? null : $this->published;
 
         if ($this->image_select) {
             $old_image = $item->image;
@@ -127,6 +135,8 @@ class NewsComponent extends Component
         $this->description = '';
         $this->image = '';
         $this->image_select = '';
+        $this->published = '';
+        $this->is_birthday = false;
     }
 
     public function render()

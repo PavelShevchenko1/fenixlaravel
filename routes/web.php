@@ -1,5 +1,7 @@
 <?php
 
+use App\Livewire\AdminComponent;
+use App\Livewire\HomeComponent;
 use App\Livewire\NewsComponent;
 use App\Livewire\NotificationComponent;
 use App\Livewire\SortsComponent;
@@ -29,13 +31,14 @@ Route::post('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'root']);
+    Route::get('/', HomeComponent::class);
     Route::get('/index', function () {
         return redirect('/');
     });
     Route::get('/news', NewsComponent::class);
     Route::get('/users', UsersComponent::class);
     Route::get('/user-groups', UserGroupsComponent::class);
+    Route::get('/administrators', AdminComponent::class);
     Route::get('/sorts', SortsComponent::class);
     Route::get('/stores', StoresComponent::class);
     Route::get('/notifications', NotificationComponent::class);

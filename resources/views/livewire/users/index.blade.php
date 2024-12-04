@@ -61,27 +61,31 @@
                                     @else
                                         -
                                     @endif
-
                                 @endif
-                    </td>
-                    <td>{{ $item->birth }}</td>
-                    <td>{{ $item->pol }}</td>
-                    <td>
-                        {{ $item->updated_at->format('d.m.Y H:i') }}
-                    </td>
-                    <td>
-                        {{ $item->created_at->format('d.m.Y H:i') }}
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-outline-danger btn-sm"
-                            wire:click="openDeleteModal('{{ $item->session_id }}')">
-                            <i class="uil uil-trash-alt"></i>
-                        </button>
-                    </td>
-                    </tr>
+                            </td>
+                            <td>{{ $item->birth }}</td>
+                            <td>{{ $item->pol }}</td>
+                            <td>
+                                {{ $item->updated_at->format('d.m.Y H:i') }}
+                            </td>
+                            <td>
+                                {{ $item->created_at->format('d.m.Y H:i') }}
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-outline-danger btn-sm"
+                                    wire:click="openDeleteModal('{{ $item->session_id }}')">
+                                    <i class="uil uil-trash-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
+        </div>
+    </div>
+    {{ $items->links() }}
+    <div class="row mt-5">
+        <div class="col-lg-8">
         </div>
     </div>
 </div>

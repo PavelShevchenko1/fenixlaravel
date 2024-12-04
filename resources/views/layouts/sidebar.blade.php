@@ -32,6 +32,11 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
+                <li>
+                    <a href="{{ url('/') }}">
+                        <i class="uil-home-alt"></i><span>Главная</span>
+                    </a>
+                </li>
                 <li class="menu-title">Контент</li>
                 <li>
                     <a href="{{ url('/news') }}">
@@ -62,6 +67,11 @@
                 <li>
                     <a href="{{ url('/notifications') }}">
                         <i class="bx bx-bell"></i><span>Уведомления</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/administrators') }}">
+                        <i class="bx bx-shield-quarter"></i><span>Администраторы</span>
                     </a>
                 </li>
 

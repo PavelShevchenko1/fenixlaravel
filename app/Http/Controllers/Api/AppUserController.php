@@ -19,7 +19,6 @@ class AppUserController extends Controller
     {
         $profile = Session::user();
 
-
         if ($profile) {
             return response()->json($profile, 200);
         } else {

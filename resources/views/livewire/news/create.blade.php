@@ -41,6 +41,17 @@
                             @error('description')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
+                            <label class="form-label" for="published">Дата публикации</label>
+                            <input type="date" class="form-control" id="published" wire:model="published">
+                            @error('published')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                            <div class="form-check form-switch mt-3">
+                                <input type="checkbox" class="form-check-input" id="is_birthday"
+                                    wire:model="is_birthday">
+                                <label class="form-check-label" for="is_birthday">Поздравление <i
+                                        class="bx bx-cake text-primary"></i></label>
+                            </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="d-flex justify-content-between align-items-center">

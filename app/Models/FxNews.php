@@ -12,6 +12,8 @@ class FxNews extends Model
     protected $fillable = [
         'title',
         'description',
+        'published',
+        'is_birthday',
         'image',
     ];
 
