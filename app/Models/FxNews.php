@@ -9,6 +9,10 @@ class FxNews extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'description' => 'string',
+    ];
+
     protected $fillable = [
         'title',
         'description',

@@ -25,7 +25,13 @@ class NewsController extends Controller
             $birthday_news = FxNews::where('is_birthday', true)->get();
             $news = $birthday_news->merge($news);
         }
-        return response()->json($news);
+        foreach ($news as &$new) {
+            $new->description = mb_convert_encoding($new->description, 'UTF-8', 'auto');
+            // $new->description = '' . $new->description;
+            // $new->description = htmlentities($new->description);
+        }
+
+        return response()->json($news, 200, [], JSON_INVALID_UTF8_IGNORE);
     }
 
     // get news by id
